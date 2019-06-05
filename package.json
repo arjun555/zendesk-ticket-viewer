@@ -1,0 +1,26 @@
+{
+  "name": "zendesk-ticket-viewer",
+  "version": "1.0.0",
+  "description": "Zendesk 2019 Internship Coding Challenge",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arjun555/zendesk-ticket-viewer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arjun555/zendesk-ticket-viewer/issues"
+  },
+  "homepage": "https://github.com/arjun555/zendesk-ticket-viewer#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}

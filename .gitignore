@@ -1,0 +1,4 @@
+# git ignore the following files and dependencies
+
+# Dependency directories
+node_modules/
