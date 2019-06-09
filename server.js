@@ -6,13 +6,22 @@ const app = express()
 const port = 8080;
 // configure dotenv module
 dotenv.config()
+
 app.listen(port, () => {
     console.log(`listening on port ${port}`)
 })
+// set the view directory to ./views
+app.set("views", `./views`)
+// express setting to use ejs as render engine
+app.set('view engine', 'ejs')
 
 app.get('/', (req, appRes) => {
 
-    http.getAllTicketData().then((result) => console.log(result))
+    // Get all tickets
+    http.getAllTicketData().then((result) => 
+                                appRes.render('tickets', {
+                                    tickets: result.tickets
+                                }))
                             .catch((error) => console.log(error))
 
 })
