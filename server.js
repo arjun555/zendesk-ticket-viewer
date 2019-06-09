@@ -1,4 +1,4 @@
-const http = require ('./tickets')
+const http = require ('./http')
 const express = require('express')
 // const axios = require('axios')
 const dotenv = require ('dotenv')
@@ -24,7 +24,8 @@ app.get('/tickets', (req, appRes) => {
     // Get all tickets
     http.getAllTicketData().then((result) => 
                                 appRes.render('tickets', {
-                                    tickets: result.tickets
+                                    tickets: result.tickets,
+                                    nextPage: result.next_page
                                 }))
                             .catch((error) => console.log(error))
 })
