@@ -15,15 +15,18 @@ app.set("views", `./views`)
 // express setting to use ejs as render engine
 app.set('view engine', 'ejs')
 
-app.get('/', (req, appRes) => {
 
+app.get('/', (req, appRes) => {
+    appRes.render('home')
+})
+
+app.get('/tickets', (req, appRes) => {
     // Get all tickets
     http.getAllTicketData().then((result) => 
                                 appRes.render('tickets', {
                                     tickets: result.tickets
                                 }))
                             .catch((error) => console.log(error))
-
 })
 
 
