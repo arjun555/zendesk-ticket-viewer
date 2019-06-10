@@ -19,8 +19,8 @@ class Tickets {
         return this.token
     }
 
-    setNextPage(data){
-        
+    setNextPage(url){
+        return this.nextPage = url
     }
 
     // Get tickets from API. Number of tickets data is capped by the 'numberOfTickets' arg
