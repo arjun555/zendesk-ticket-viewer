@@ -4,7 +4,8 @@
   "description": "Zendesk 2019 Internship Coding Challenge",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "test": "jest ./tests"
   },
   "repository": {
     "type": "git",
