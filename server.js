@@ -47,8 +47,8 @@ app.get('/tickets', (req, appRes) => {
                 if(result.tickets){
                     appRes.render('tickets', {
                         tickets: result.tickets,
-                        nextPage: Number(page) + 1,
-                        previousPage: Number(page) - 1,
+                        nextPage: result.next_page ? Number(page) + 1 : 0,
+                        previousPage: result.previous_page ? Number(page) - 1 : 0,
                         count: result.count
                     })
                 }else{
