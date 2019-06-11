@@ -11,6 +11,15 @@
         <% tickets.forEach((ticket, index) => { %>
             <li>
                 <h2><%=ticket.subject%></h2>
+                <article>
+                    <p>Status: <%= ticket.status%></p>
+                    <p>Description: <%= ticket.description%></p>
+                    <footer>
+                        <% ticket.tags.forEach((tag) => { %>
+                            <a href="#"><%=tag%></a>
+                        <% }) %>
+                    </footer>
+                </article>
             </li>
         <% }) %>
     </ul>
