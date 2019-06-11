@@ -29,14 +29,12 @@ tickets.setToken(process.env.ZENDESK_API_PASS)
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Startup Route
-app.get('/', (req, appRes) => {
-    appRes.render('home')
-})
+app.get('/', (req, res) => homePage(req, res))
 
 // Tickets Route
 app.get('/tickets', (req, res) => ticketsPage(req, res))
 
-function ticketsPage (req, appRes) {
+function ticketsPage (req, res) {
     // Set page
     let page = 1;
     if(req.query.page){
@@ -46,18 +44,22 @@ function ticketsPage (req, appRes) {
     tickets.getTickets(page)
             .then((result) => {
                 if(result.tickets){
-                    appRes.render('tickets', {
+                    res.render('tickets', {
                         tickets: result.tickets,
                         nextPage: tickets.getNextPage(page),
                         previousPage: tickets.getPreviousPage(page),
                         count: result.count
                     })
                 }else{
-                    appRes.render('error', {
+                    res.render('error', {
                         status: result.status,
                         text: result.statusText
                     })
                 }
             })
             .catch((error) => {console.log(error)})
+}
+
+function homePage(req, res){
+    res.render('home')
 }
