@@ -69,7 +69,7 @@ describe('Tickets class', ()=>{
 
     test('getPreviousPage() returns 1, if the currentPage is 2 and testTickets.previousPage is not null', () =>{
         let currentPage = 2;
-        testTickets.previousPage = apiResData.previous_page
+        testTickets.previousPage = "https://apatel.zendesk.com/api/v2/tickets.json?page=2&per_page=2"
         expect(testTickets.getPreviousPage(currentPage)).toBe(1)
     })
 
