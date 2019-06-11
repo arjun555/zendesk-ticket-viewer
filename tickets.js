@@ -22,8 +22,16 @@ class Tickets {
         return this.nextPage = url
     }
 
+    getNextPage(currentPageNum){
+        return this.nextPage ?  Number(currentPageNum) + 1 : 0;
+    }
+
     setPreviousPage(url){
         return this.previousPage = url
+    }
+
+    getPreviousPage(currentPageNum){
+        return this.previousPage ?  Number(currentPageNum) - 1 : 0;
     }
 
     setTicketCount(ticketCount){
@@ -39,26 +47,12 @@ class Tickets {
             .then(res => {
                 // status will be 200
                 this.setNextPage(res.data.next_page)
+                this.setPreviousPage(res.data.previous_page)
                 return (res.data)})
             .catch(res => {
                 // status will be  >= 400
                 return (res.response)})
     }
-
-    getNextTicketsPage(){
-        return axios.get(`${this.nextPage}`, {
-            headers: {
-                Authorization: `Basic ${this.token}` 
-            }})
-            .then(res => {
-                // status will be 200
-                this.setNextPage(res.data.next_page)
-                return (res.data)})
-            .catch(res => {
-                // status will be  >= 400
-                return (res.response)})
-    }
-
 }
 
 module.exports = {Tickets}

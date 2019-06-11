@@ -50,8 +50,32 @@ describe('Tickets class', ()=>{
         expect(testTickets.setTicketCount(apiResData.count)).toBe(104)
     })
 
-    test('getNextTicketsPage() will call the api and return an object', () =>{
+    test('getNextPage() returns a number', () =>{
         testTickets.nextPage = apiResData.next_page
-        expect(typeof testTickets.getNextTicketsPage()).toBe('object')
+        expect(typeof testTickets.getNextPage(1)).toBe('number')
+    })
+
+    test('getNextPage() returns 3, if the currentPage is 2 and testTickets.nextPage is not null', () =>{
+        let currentPage = 2;
+        testTickets.nextPage = apiResData.next_page
+        expect(testTickets.getNextPage(currentPage)).toBe(3)
+    })
+
+    test('getNextPage() returns 0, if the currentPage is 2 and testTickets.nextPage is null', () =>{
+        let currentPage = 2;
+        testTickets.nextPage = null
+        expect(testTickets.getNextPage(currentPage)).toBe(0)
+    })
+
+    test('getPreviousPage() returns 1, if the currentPage is 2 and testTickets.previousPage is not null', () =>{
+        let currentPage = 2;
+        testTickets.previousPage = apiResData.previous_page
+        expect(testTickets.getPreviousPage(currentPage)).toBe(1)
+    })
+
+    test('getPreviousPage() returns 0, if the currentPage is 1 and testTickets.previousPage is null', () =>{
+        let currentPage = 1;
+        testTickets.previousPage = null
+        expect(testTickets.getPreviousPage(currentPage)).toBe(0)
     })
 })
