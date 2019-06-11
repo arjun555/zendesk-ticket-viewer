@@ -11,8 +11,8 @@
     <ul>
         <% tickets.forEach((ticket, index) => { %>
             <li>
-                <h2><%=ticket.subject%></h2>
-                <article>
+                <h2 class="ticket-subject"><%=ticket.subject%></h2>
+                <article class="ticket-details">
                     <p>Status: <%= ticket.status%></p>
                     <p>Description: <%= ticket.description%></p>
                     <footer>
@@ -32,5 +32,6 @@
         <a href= <%= `/tickets?page=${nextPage}` %>>next</a>
     <% } %>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="/js/ticket.js"></script>
 </html>

@@ -3,3 +3,13 @@
     margin: 0;
     padding: 0;
 }
+
+.ticket-details{
+    background-color: lavender;
+    display: none;
+    
+}
+
+.reveal{
+    display: inline;
+}
