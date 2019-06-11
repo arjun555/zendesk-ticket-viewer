@@ -1,9 +1,6 @@
-const http = require ('./http')
 const {Tickets} = require('./tickets')
 const dotenv = require ('dotenv')
 const express = require('express')
-const methodOverride = require('method-override')
-const bodyParser = require('body-parser')
 const app = express()
 const port = 8080;
 
@@ -13,8 +10,8 @@ dotenv.config()
 // set the view directory to ./views and the view engine to ejs
 app.set('views', './views')
 app.set('view engine', 'ejs')
-// override with POST having ?_method=DELETE
-app.use(methodOverride('_method'))
+// middleware function to serve static files from public
+app.use(express.static('public'));
 app.listen(port, () => {
     console.log(`listening on port ${port}`)
 })
