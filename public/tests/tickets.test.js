@@ -42,4 +42,16 @@ describe('Tickets class', ()=>{
         expect(testTickets.setNextPage(apiResData.next_page)).toBe("https://apatel.zendesk.com/api/v2/tickets.json?page=2&per_page=2")
     })
 
+    test('setPreviousPage() will take the data returned from the api call, and set the previousPage property', () =>{
+        expect(testTickets.setPreviousPage(apiResData.previous_page)).toBe(null)
+    })
+
+    test('setTicketCount() will take the data returned from the api call, and set the count property', () =>{
+        expect(testTickets.setTicketCount(apiResData.count)).toBe(104)
+    })
+
+    test('getNextTicketsPage() will call the api and return an object', () =>{
+        testTickets.nextPage = apiResData.next_page
+        expect(typeof testTickets.getNextTicketsPage()).toBe('object')
+    })
 })

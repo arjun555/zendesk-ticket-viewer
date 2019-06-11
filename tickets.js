@@ -1,5 +1,4 @@
 const axios = require('axios')
-const dotenv = require ('dotenv')
 
 class Tickets {
 
@@ -20,21 +19,45 @@ class Tickets {
     }
 
     setNextPage(url){
-        return this.nextPage = url
+        this.nextPage = url
+        console.log(`${this.nextPage}`)
     }
 
-    // Get tickets from API. Number of tickets data is capped by the 'numberOfTickets' arg
-    getTickets (numberOfTickets=25){
-    return axios.get(`https://${this.domain}.zendesk.com/api/v2/tickets?per_page=${numberOfTickets}`, {
-        headers: {
-            Authorization: `Basic ${this.token}` 
-        }})
-        .then(res => {
-            // status will be 200
-            return (res.data)})
-        .catch(res => {
-            // status will be  >= 400
-            return (res.response)})
+    setPreviousPage(url){
+        return this.previousPage = url
+    }
+
+    setTicketCount(ticketCount){
+        return this.count = ticketCount
+    }
+
+    // Get tickets from API. Number of tickets data is capped by the value of this.perPage property
+    getTickets (){
+        return axios.get(`https://${this.domain}.zendesk.com/api/v2/tickets?per_page=${this.perPage}`, {
+            headers: {
+                Authorization: `Basic ${this.token}` 
+            }})
+            .then(res => {
+                // status will be 200
+                this.setNextPage(res.data.next_page)
+                return (res.data)})
+            .catch(res => {
+                // status will be  >= 400
+                return (res.response)})
+    }
+
+    getNextTicketsPage(){
+        return axios.get(`${this.nextPage}`, {
+            headers: {
+                Authorization: `Basic ${this.token}` 
+            }})
+            .then(res => {
+                // status will be 200
+                this.setNextPage(res.data.next_page)
+                return (res.data)})
+            .catch(res => {
+                // status will be  >= 400
+                return (res.response)})
     }
 
 }
