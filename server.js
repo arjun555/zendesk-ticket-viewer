@@ -34,30 +34,42 @@ app.get('/', (req, res) => homePage(req, res))
 // Tickets Route
 app.get('/tickets', (req, res) => ticketsPage(req, res))
 
-function ticketsPage (req, res) {
-    // Set page
+function ticketsPage (req, pageRes) {
+    // Set page number
     let page = 1;
     if(req.query.page){
         page = req.query.page
     }
 
+    // Call API for Ticket Data
     tickets.getTickets(page)
-            .then((result) => {
-                if(result.tickets){
-                    res.render('tickets', {
-                        tickets: result.tickets,
-                        nextPage: tickets.getNextPage(page),
-                        previousPage: tickets.getPreviousPage(page),
-                        count: result.count
-                    })
-                }else{
-                    res.render('error', {
-                        status: result.status,
-                        text: result.statusText
-                    })
-                }
-            })
-            .catch((error) => {console.log(error)})
+        .then((dataRes) => {
+            processData(dataRes)
+            return dataRes
+        })
+        .then((dataRes) => {
+            renderTickets(pageRes, dataRes, page)} )
+        .catch((err) => {renderError(pageRes, err)})
+}
+
+function processData(res){
+    tickets.processData(res.data)
+}
+
+function renderTickets(pageRes, dataRes, page){
+    pageRes.render('tickets', {
+        tickets: dataRes.data.tickets,
+        nextPage: tickets.getNextPage(page),
+        previousPage: tickets.getPreviousPage(page),
+        count: dataRes.data.count
+})}
+
+function renderError(pageRes, errRes){
+    pageRes.render('error',
+    {
+        status: errRes.response.status,
+        text: errRes.response.statusText
+    })
 }
 
 function homePage(req, res){

@@ -78,4 +78,7 @@ describe('Tickets class', ()=>{
         testTickets.previousPage = null
         expect(testTickets.getPreviousPage(currentPage)).toBe(0)
     })
+
+
+    
 })
