@@ -34,8 +34,9 @@ app.get('/', (req, appRes) => {
 })
 
 // Tickets Route
-app.get('/tickets', (req, appRes) => {
+app.get('/tickets', (req, res) => ticketsPage(req, res))
 
+function ticketsPage (req, appRes) {
     // Set page
     let page = 1;
     if(req.query.page){
@@ -59,4 +60,4 @@ app.get('/tickets', (req, appRes) => {
                 }
             })
             .catch((error) => {console.log(error)})
-})
+}
