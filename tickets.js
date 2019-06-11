@@ -19,8 +19,7 @@ class Tickets {
     }
 
     setNextPage(url){
-        this.nextPage = url
-        console.log(`${this.nextPage}`)
+        return this.nextPage = url
     }
 
     setPreviousPage(url){
@@ -32,8 +31,8 @@ class Tickets {
     }
 
     // Get tickets from API. Number of tickets data is capped by the value of this.perPage property
-    getTickets (){
-        return axios.get(`https://${this.domain}.zendesk.com/api/v2/tickets?per_page=${this.perPage}`, {
+    getTickets (page=1){
+        return axios.get(`https://${this.domain}.zendesk.com/api/v2/tickets?page=${page}&per_page=${this.perPage}`, {
             headers: {
                 Authorization: `Basic ${this.token}` 
             }})

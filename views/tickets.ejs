@@ -14,8 +14,12 @@
             </li>
         <% }) %>
     </ul>
-    <% if(nextPage){ %>
-        <a href="next">next</a>
+    <% if(previousPage >= 1){ %>
+        <a href= <%= `/tickets?page=${previousPage}` %>>previous</a>
+    <% } %>
+
+    <% if(nextPage > 1){ %>
+        <a href= <%= `/tickets?page=${nextPage}` %>>next</a>
     <% } %>
 </body>
 </html>
