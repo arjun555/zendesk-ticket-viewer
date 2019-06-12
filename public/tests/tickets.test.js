@@ -79,6 +79,16 @@ describe('Tickets class', ()=>{
         expect(testTickets.getPreviousPage(currentPage)).toBe(0)
     })
 
+    test('tickets.checkPageValid() returns 1, when 1 is passed in', () =>{
+        expect(testTickets.checkPageValid(1)).toBe(1)
+    })
 
+    test('tickets.checkPageValid() returns 1, when 0 is passed in', () =>{
+        expect(testTickets.checkPageValid(0)).toBe(1)
+    })
+
+    test('tickets.checkPageValid() returns 1, when undefined is passed in', () =>{
+        expect(testTickets.checkPageValid(undefined)).toBe(1)
+    })
     
 })

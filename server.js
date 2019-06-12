@@ -25,25 +25,21 @@ tickets.setToken(process.env.ZENDESK_API_PASS)
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Startup Route
-app.get('/', (req, res) => homePage(req, res))
+app.get('/', (req, res) => renderHomePage(req, res))
 
 // Tickets Route
 app.get('/tickets', (req, res) => ticketsPage(req, res))
 
-app.get('*', (req, res) => { renderUnknownRoute(req, res)});
+// Unknown Route 
+app.get('*', (req, res) => renderUnknownRoute(req, res));
 
 function ticketsPage (req, pageRes) {
-    // Set page number
-    let page = 1;
-    if(req.query.page){
-        page = req.query.page
-    }
-
+    // check page querystring is valid
+    let page = tickets.checkPageValid(req.query.page)
     // Call API for Ticket Data
     tickets.getTickets(page)
         .then((dataRes) => {
             processData(dataRes)
-            // return dataRes so that it can be used in the next .then() chain
             return dataRes
         })
         .then((dataRes) => {
@@ -80,6 +76,6 @@ function renderUnknownRoute(pageReq, pageRes){
     })
 }
 
-function homePage(req, res){
+function renderHomePage(req, res){
     res.render('home')
 }

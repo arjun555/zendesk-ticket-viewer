@@ -44,6 +44,10 @@ class Tickets {
         this.setTicketCount(apiData.count)
     }
 
+    checkPageValid(page){
+        return !page || (page) < 1?  1: page;
+    }
+
     // Get tickets from API. Number of tickets data is capped by the value of this.perPage property
     getTickets(page=1){
         return axios.get(`https://${this.domain}.zendesk.com/api/v2/tickets?page=${page}&per_page=${this.perPage}`, {
