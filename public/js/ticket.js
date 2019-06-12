@@ -1,9 +1,9 @@
 console.log('ticket jQuery')
 
 $(document).ready( () =>{
-    $('.ticket-subject').click(toggleDetails)
+    $('.tickets-item').click(toggleDetails)
 })
 
 function toggleDetails(){
-    $(event.target).next('.ticket-details').toggleClass('reveal')
+    $(event.target).children('.ticket-details').fadeToggle(200)
 }

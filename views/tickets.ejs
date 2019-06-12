@@ -18,7 +18,7 @@
             <ul class="tickets-list">
                 <% tickets.forEach((ticket, index) => { %>
                     <li class="tickets-item"> 
-                        <span class="ticket-subject"><%=ticket.subject%></span>
+                        <%=ticket.subject%>
                         <article class="ticket-details">
                             <div>
                                 <b>Status: </b><p><%= ticket.status%></p>

@@ -32,6 +32,7 @@ header h1{
 }
 
 .tickets-list li{
+    font-size: 1.1em;
     margin-top: 1em;
     border: 1px solid #33333378;
     border: 1px solid #33333378;
@@ -39,13 +40,8 @@ header h1{
     padding: 10px;
     padding-left: 10px;
 }
-
-.ticket-subject{
-    font-size: 1.1em;
-}
-
-.ticket-item{
-    padding-top: 10px;
+article{
+    transition: display 2s ease-in-out;
 }
 
 .ticket-details{
@@ -53,7 +49,6 @@ header h1{
     font-size: 16px;
     line-height: 1.5;
     color: #333;
-    transition: all 5s linear;
 }
 
 .ticket-details div{
@@ -63,11 +58,7 @@ header h1{
     padding-bottom: 5px;
 }
 
-.reveal{
-    display: inline;
-}
-
-.ticket-subject:hover{
+.tickets-item:hover{
     cursor: pointer;
 }
 
