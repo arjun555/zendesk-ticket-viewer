@@ -5,8 +5,6 @@ const express = require('express')
 const app = express()
 const port = 8080;
 
-// // configure dotenv for environment variables
-// dotenv.config()
 // set the view directory to ./views and the view engine to ejs
 app.set('views', './views')
 app.set('view engine', 'ejs')
@@ -16,15 +14,11 @@ app.listen(port, () => {
     console.log(`listening on port ${port}`)
 })
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-// Routing
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
 // Startup Route
 app.get('/', (req, res) => homeController.render(req, res))
 
 // Tickets Route
-app.get('/tickets', (req, res) => ticketsController.ticketsPage(req, res))
+app.get('/tickets', (req, res) => ticketsController.render(req, res))
 
 // Unknown Route 
-app.get('*', (req, res) => unknownController.renderUnknownRoute(req, res));
+app.get('*', (req, res) => unknownController.render(req, res));

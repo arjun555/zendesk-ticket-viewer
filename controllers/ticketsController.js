@@ -45,5 +45,5 @@ function renderError(pageRes, errRes){
 }
 
 module.exports ={
-    ticketsPage: ticketsPage
+    render: ticketsPage
 }

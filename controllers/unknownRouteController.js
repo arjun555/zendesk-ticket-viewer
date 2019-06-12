@@ -8,5 +8,5 @@ function renderUnknownRoute(pageReq, pageRes){
 }
 
 module.exports = {
-    renderUnknownRoute : renderUnknownRoute
+    render : renderUnknownRoute
 }
