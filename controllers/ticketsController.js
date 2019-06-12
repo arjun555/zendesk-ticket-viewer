@@ -32,7 +32,9 @@ function renderTickets(pageRes, dataRes, page){
         tickets: dataRes.data.tickets,
         nextPage: tickets.getNextPage(page),
         previousPage: tickets.getPreviousPage(page),
-        count: dataRes.data.count
+        count: dataRes.data.count,
+        currentPage: page,
+        perPage: tickets.perPage
 })}
 
 // Render error.ejs page for the case of an api error response

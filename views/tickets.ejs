@@ -14,7 +14,8 @@
     <main>
         <div class="container">
             <!-- Display Tickets -->
-            <h2>tickets</h2>
+            <h2>Tickets</h2>
+            <span class="total-tickets">Showing Tickets <%= (previousPage * perPage) + 1 %> to <%= (currentPage * perPage) - (perPage - tickets.length) %>.  Total Tickets: <%=count%></span>
             <ul class="tickets-list">
                 <% tickets.forEach((ticket, index) => { %>
                     <li class="tickets-item"> 
@@ -40,7 +41,6 @@
             <% } %>
         </footer>
     </main>
-    <footer></footer>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="/js/ticket.js"></script>
