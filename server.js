@@ -18,7 +18,6 @@ app.listen(port, () => {
 
 // Initialize Tickets instance and set API token
 const tickets = new Tickets(process.env.ZENDESK_API_USER, process.env.ZENDESK_API_DOMAIN)
-
 tickets.setToken(process.env.ZENDESK_API_PASS)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
