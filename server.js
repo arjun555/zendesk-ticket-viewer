@@ -31,6 +31,8 @@ app.get('/', (req, res) => homePage(req, res))
 // Tickets Route
 app.get('/tickets', (req, res) => ticketsPage(req, res))
 
+app.get('*', (req, res) => { renderUnknownRoute(req, res)});
+
 function ticketsPage (req, pageRes) {
     // Set page number
     let page = 1;
@@ -68,6 +70,14 @@ function renderError(pageRes, errRes){
     {
         status: errRes.response.status,
         text: errRes.response.statusText
+    })
+}
+
+function renderUnknownRoute(pageReq, pageRes){
+    pageRes.render('error',
+    {
+        status: '404',
+        text: `The requested URL '${pageReq.res.req._parsedOriginalUrl.pathname}' was not found on this server.`
     })
 }
 
