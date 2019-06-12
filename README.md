@@ -53,6 +53,12 @@ To run the project, start the server by running the command
 
 The project will run on localhost:8080
 
+### Running project tests
+
+This project uses Jest for the testing framework. To run the tests, run the following command:
+
+    $ npm test
+
 # Project Notes
 ## Planning
 This coding challenge required a ticket viewer be built with the following requirements:
