@@ -68,13 +68,16 @@ This coding challenge required a ticket viewer be built with the following requi
 - Display individual ticket details 
 - Include testing
 - Use basic authentication for API calls
+- Follow MVC and apply smart seperation of concerns
 
 ## How was the app implemented?
 
+- The front end of the app is built using HTML and CSS. 
+    - JQuery was used to provide the show/hide feature of the tickets details.
 - The backend of the app was driven by NodeJS using the Express web framework. 
-- [Axios](https://github.com/axios/axios) is used as the http client
-- [Jest](https://jestjs.io/) is used as the testing framework
-- [Dotenv](https://www.npmjs.com/package/dotenv) is used to handle the authentication. I decided to utilize using environment variables as opposed to creating a login page.
+    - [Axios](https://github.com/axios/axios) is used as the http client
+    - [Jest](https://jestjs.io/) is used as the testing framework
+    - [Dotenv](https://www.npmjs.com/package/dotenv) is used to handle the authentication. I decided to utilize using environment variables as opposed to creating a login page. I understand that this is not what I would use if built for production. But for a coding challenge like this where my account information has to be shared, I believe using a configuration file such as .env and utilizing environment variables is sufficient.
 
 ## UI
 The application's UI was kept simple and minimalistic.
