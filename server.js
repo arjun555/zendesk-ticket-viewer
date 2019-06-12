@@ -1,12 +1,11 @@
-const {Tickets} = require('./models/ticketsModel')
 const homeController = require('./controllers/homeController')
-const dotenv = require ('dotenv')
+const ticketsController = require('./controllers/ticketsController')
 const express = require('express')
 const app = express()
 const port = 8080;
 
-// configure dotenv for environment variables
-dotenv.config()
+// // configure dotenv for environment variables
+// dotenv.config()
 // set the view directory to ./views and the view engine to ejs
 app.set('views', './views')
 app.set('view engine', 'ejs')
@@ -16,10 +15,6 @@ app.listen(port, () => {
     console.log(`listening on port ${port}`)
 })
 
-// Initialize Tickets instance and set API token
-const tickets = new Tickets(process.env.ZENDESK_API_USER, process.env.ZENDESK_API_DOMAIN)
-tickets.setToken(process.env.ZENDESK_API_PASS)
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Routing
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -28,49 +23,10 @@ tickets.setToken(process.env.ZENDESK_API_PASS)
 app.get('/', (req, res) => homeController.render(req, res))
 
 // Tickets Route
-app.get('/tickets', (req, res) => ticketsPage(req, res))
+app.get('/tickets', (req, res) => ticketsController.ticketsPage(req, res))
 
 // Unknown Route 
 app.get('*', (req, res) => renderUnknownRoute(req, res));
-
-
-function ticketsPage (req, pageRes) {
-    // check page querystring is valid
-    let page = tickets.checkPageValid(req.query.page)
-    // Call API for Ticket Data
-    tickets.getTickets(page)
-        .then((dataRes) => {
-            processData(dataRes)
-            return dataRes
-        })
-        .then((dataRes) => {
-            renderTickets(pageRes, dataRes, page)
-        })
-        .catch((err) => {renderError(pageRes, err)})
-}
-
-// Process the tickets data from a successful api call
-function processData(res){
-    tickets.processData(res.data)
-}
-
-// Render tickets.ejs to show ticket data
-function renderTickets(pageRes, dataRes, page){
-    pageRes.render('tickets', {
-        tickets: dataRes.data.tickets,
-        nextPage: tickets.getNextPage(page),
-        previousPage: tickets.getPreviousPage(page),
-        count: dataRes.data.count
-})}
-
-// Render error.ejs page for the case of an api error response
-function renderError(pageRes, errRes){
-    pageRes.render('error',
-    {
-        status: errRes.response.status,
-        text: errRes.response.statusText
-    })
-}
 
 // Render error.ejs page for the case of an unknown route
 function renderUnknownRoute(pageReq, pageRes){
