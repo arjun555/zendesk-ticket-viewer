@@ -19,7 +19,7 @@ This project has been created using Nodejs (v10.15.3)
 
         $ nvm version
 
-## 
+## Configuration of the project
 
 3. Next clone the github repo ([Zendesk Ticket Viewer](https://github.com/arjun555/zendesk-ticket-viewer)) to your computer
 
@@ -35,7 +35,7 @@ This project has been created using Nodejs (v10.15.3)
 
 ### Setting up the project's configuration file
 
-In order to use the Zendesk Ticket Viewer, the Zendesk api requires an authenticated user account. If you do not have an account with zendesk, a free trial is availble from the [Zendesk website](https://zendesk.com/)
+In order to use the Zendesk Ticket Viewer, the Zendesk API requires an authenticated user account. If you do not have an account with zendesk, a free trial is availble from the [Zendesk website](https://zendesk.com/)
 
 This project requires user account information to be entered into the `.env` file, prior to starting the server.
 
@@ -76,7 +76,7 @@ The application's UI was kept simple and minimalistic.
     - Button to view tickets. Clicking this will initiate the API call to gather tickets 
 - Tickets
     - Displays (upto) 25 tickets on the page. 
-    - If there are more tickets then a `next` button is displayed at the bottom of the page. When clicked, a call is made to request the next batch of tickets.
+    - If there are more tickets, a `next` button is displayed at the bottom of the page. When clicked, a call is made to request the next batch of tickets.
     - Conversely, a `previous` button is displayed if it is possible to view the previous set of 25 tickets.
     - Clicking on the Ticket's Subject title will expand to show more details about that particular ticket. The ticket's status and description are displayed.
 - Errors
