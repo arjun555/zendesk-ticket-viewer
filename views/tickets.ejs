@@ -5,32 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/css/style.css">
-    <title>Document</title>
+    <title>zendesk | tickets</title>
 </head>
 <body>
-    <ul>
-        <% tickets.forEach((ticket, index) => { %>
-            <li>
-                <h2 class="ticket-subject"><%=ticket.subject%></h2>
-                <article class="ticket-details">
-                    <p>Status: <%= ticket.status%></p>
-                    <p>Description: <%= ticket.description%></p>
-                    <footer>
-                        <% ticket.tags.forEach((tag) => { %>
-                            <a href="#"><%=tag%></a>
-                        <% }) %>
-                    </footer>
-                </article>
-            </li>
-        <% }) %>
-    </ul>
-    <% if(previousPage >= 1){ %>
-        <a href= <%= `/tickets?page=${previousPage}` %>>previous</a>
-    <% } %>
-
-    <% if(nextPage > 1){ %>
-        <a href= <%= `/tickets?page=${nextPage}` %>>next</a>
-    <% } %>
+    <header>
+        <h1>Zendesk Ticket Viewer</h1>
+    </header>
+    <main>
+        <div class="container">
+            <!-- Display Tickets -->
+            <h2>tickets</h2>
+            <ul class="tickets-list">
+                <% tickets.forEach((ticket, index) => { %>
+                    <li class="tickets-item"> 
+                        <span class="ticket-subject"><%=ticket.subject%></span>
+                        <article class="ticket-details">
+                            <div>
+                                <b>Status: </b><p><%= ticket.status%></p>
+                                <b>Description: </b> <p><%= ticket.description%></p>
+                            </div>
+                        </article>
+                    </li>
+                <% }) %>
+            </ul>
+        </div>
+        <footer class="page-buttons">
+            <!-- Previous Page Button -->
+            <% if(previousPage >= 1){ %>
+                <a href= <%= `/tickets?page=${previousPage}` %>>previous</a>
+            <% } %>
+            <!-- Next Page Button -->
+            <% if(nextPage > 1){ %>
+                <a href= <%= `/tickets?page=${nextPage}` %>>next</a>
+            <% } %>
+        </footer>
+    </main>
+    <footer></footer>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="/js/ticket.js"></script>

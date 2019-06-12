@@ -42,10 +42,12 @@ function ticketsPage (req, pageRes) {
     tickets.getTickets(page)
         .then((dataRes) => {
             processData(dataRes)
+            // return dataRes so that it can be used in the next .then() chain
             return dataRes
         })
         .then((dataRes) => {
-            renderTickets(pageRes, dataRes, page)} )
+            renderTickets(pageRes, dataRes, page)
+        })
         .catch((err) => {renderError(pageRes, err)})
 }
 
