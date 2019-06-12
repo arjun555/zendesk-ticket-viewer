@@ -1,4 +1,4 @@
-const {Tickets} = require('../../tickets')
+const {Tickets} = require('../models/ticketsModel')
 
 
 describe('Tickets class', ()=>{

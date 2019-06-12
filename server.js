@@ -1,4 +1,5 @@
-const {Tickets} = require('./tickets')
+const {Tickets} = require('./models/ticketsModel')
+const homeController = require('./controllers/homeController')
 const dotenv = require ('dotenv')
 const express = require('express')
 const app = express()
@@ -6,7 +7,6 @@ const port = 8080;
 
 // configure dotenv for environment variables
 dotenv.config()
-
 // set the view directory to ./views and the view engine to ejs
 app.set('views', './views')
 app.set('view engine', 'ejs')
@@ -25,13 +25,14 @@ tickets.setToken(process.env.ZENDESK_API_PASS)
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Startup Route
-app.get('/', (req, res) => renderHomePage(req, res))
+app.get('/', (req, res) => homeController.render(req, res))
 
 // Tickets Route
 app.get('/tickets', (req, res) => ticketsPage(req, res))
 
 // Unknown Route 
 app.get('*', (req, res) => renderUnknownRoute(req, res));
+
 
 function ticketsPage (req, pageRes) {
     // check page querystring is valid
@@ -48,10 +49,12 @@ function ticketsPage (req, pageRes) {
         .catch((err) => {renderError(pageRes, err)})
 }
 
+// Process the tickets data from a successful api call
 function processData(res){
     tickets.processData(res.data)
 }
 
+// Render tickets.ejs to show ticket data
 function renderTickets(pageRes, dataRes, page){
     pageRes.render('tickets', {
         tickets: dataRes.data.tickets,
@@ -60,6 +63,7 @@ function renderTickets(pageRes, dataRes, page){
         count: dataRes.data.count
 })}
 
+// Render error.ejs page for the case of an api error response
 function renderError(pageRes, errRes){
     pageRes.render('error',
     {
@@ -68,14 +72,11 @@ function renderError(pageRes, errRes){
     })
 }
 
+// Render error.ejs page for the case of an unknown route
 function renderUnknownRoute(pageReq, pageRes){
     pageRes.render('error',
     {
         status: '404',
         text: `The requested URL '${pageReq.res.req._parsedOriginalUrl.pathname}' was not found on this server.`
     })
-}
-
-function renderHomePage(req, res){
-    res.render('home')
 }
