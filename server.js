@@ -1,5 +1,6 @@
 const homeController = require('./controllers/homeController')
 const ticketsController = require('./controllers/ticketsController')
+const unknownController = require('./controllers/unknownRouteController')
 const express = require('express')
 const app = express()
 const port = 8080;
@@ -26,13 +27,4 @@ app.get('/', (req, res) => homeController.render(req, res))
 app.get('/tickets', (req, res) => ticketsController.ticketsPage(req, res))
 
 // Unknown Route 
-app.get('*', (req, res) => renderUnknownRoute(req, res));
-
-// Render error.ejs page for the case of an unknown route
-function renderUnknownRoute(pageReq, pageRes){
-    pageRes.render('error',
-    {
-        status: '404',
-        text: `The requested URL '${pageReq.res.req._parsedOriginalUrl.pathname}' was not found on this server.`
-    })
-}
+app.get('*', (req, res) => unknownController.renderUnknownRoute(req, res));
