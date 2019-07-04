@@ -1,4 +1,22 @@
 const {Tickets} = require('../models/ticketsModel')
+const request = require('supertest');
+const app = require('../server')
+
+
+describe('API Testing', ()=>{
+    
+    test('should return status code: 200 on /GET tickets', function(done){
+        request(app.server)
+            .get('/tickets')
+            .expect(200, done)
+    })
+
+    test('should return status code: 200 on /GET of no-existing route', function(done){
+        request(app.server)
+            .get('/doesntexist')
+            .expect(200, done)
+    })
+})
 
 
 describe('Tickets class', ()=>{
@@ -89,6 +107,10 @@ describe('Tickets class', ()=>{
 
     test('tickets.checkPageValid() returns 1, when undefined is passed in', () =>{
         expect(testTickets.checkPageValid(undefined)).toBe(1)
+    })
+
+    test('if username is correct', ()=>{
+        expect()
     })
     
 })
